@@ -167,7 +167,7 @@
 <li>Input: a set of 3D points  $\langle P_i|i=1,2,…,n\rangle$, $P_i$ is a vector of $(x,y,z)$ coordinate.</li>
 <li>Output: $k$ scores for all the $k$ candidate classes.</li>
 </ul>
-<h2 id="3-Architecture"><a href="#3-Architecture" class="headerlink" title="3.Architecture"></a>3.Architecture</h2><h3 id="1-Unified-Architecture"><a href="#1-Unified-Architecture" class="headerlink" title="(1) Unified Architecture"></a><font color=#0099ff>(1) Unified Architecture</font></h3><p><img src="http://i2.tiimg.com/705034/10a8394cf3f988d8.png" srcset="undefined" alt="PointNet Architecture"></p>
+<h2 id="3-Architecture"><a href="#3-Architecture" class="headerlink" title="3.Architecture"></a>3.Architecture</h2><h3 id="1-Unified-Architecture"><a href="#1-Unified-Architecture" class="headerlink" title="(1) Unified Architecture"></a><font color=#0099ff>(1) Unified Architecture</font></h3><p><img src="http://i2.tiimg.com/705034/10a8394cf3f988d8.pg" srcset="undefined" alt="PointNet Architecture"></p>
 <ul>
 <li><p><strong>Joint Alignment Network</strong><br>Predict  an affine transformation matrix by a mini-network(T-net) and directly apply this transformation to the coordinates of input points and features extracted.<br>To decrease the difficulty of optimizition, this paper add a regularization term to softmax training loss. The feature transform matrix is constrained to be close to orthogonal matrix:$$L_{reg}=||I-AA^T||^2_F$$</p>
 </li>
