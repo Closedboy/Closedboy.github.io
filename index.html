@@ -134,6 +134,50 @@
     
     
     <div class="col-12 col-md-8 m-auto">
+      <a href="/2019/12/03/LeetCode-1-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
+        <p class="h4 index-header">LeetCode 1： 两数之和</p>
+        
+        
+          
+        
+        <div class="index-excerpt" >
+          <div class="index-text mb-1">LeetCode 1： 两数之和题目描述给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+示例: 给定$nums = [2, 7, 11, 15], target = 9$
+ 因为$nums[0] + nums[1] = 2 + 7 = 9$ 所以返回$[0, 1]$
+思想:寻找$target-nums$，
+题解暴力破解
+用两层循环，时间复杂度$o(n^2)$
+使用List中相关函数，在每次循环中查找索引，本质上依然是$o(n^2)$的时间复杂度
+
+solution1:在每次循环中顺序查找,但当出现重复数字时，第一次查找只会找到自身，只有第二次查找时才能得到结果。
+示例: 给定$nums = [3, 7, 11, 3], target = 6$
+ 只有第二次查找时，才会返回结果
+def twoSum(nums, target):
+    for inx, num1 in enumerate(nums):
+        num2 =</div>
+        </div>
+      </a>
+
+      <div>
+        
+          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-03&nbsp;&nbsp;
+        
+        
+        
+          <i class="iconfont icon-tag"></i>
+          
+            <a href="/tags/LeetCode">LeetCode</a>&nbsp;
+          
+        
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-4 mx-auto">
+    
+    
+    <div class="col-12 col-md-8 m-auto">
       <a href="/2019/12/02/%E7%82%B9%E4%BA%91%E7%AC%94%E8%AE%B0-%E4%B8%80-%EF%BC%9APointNet/">
         <p class="h4 index-header">点云笔记(一)：PointNet</p>
         
