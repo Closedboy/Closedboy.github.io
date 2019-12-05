@@ -15,7 +15,7 @@
   <meta name="description" content="My blog.">
   <meta name="author" content="Zijian Huang">
   <meta name="keywords" content="">
-  <title>Zijian Huang</title>
+  <title>LeetCode2：两数相加 ~ Zijian Huang</title>
 
   <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css"  >
 <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css"  >
@@ -36,7 +36,7 @@
 
 
 <body>
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -107,12 +107,43 @@
             </span>
 
             
+              <br>
+              
+                <p class="mt-3">
+                  <i class="fas fa-calendar-alt" aria-hidden="true"></i>&nbsp;
+                  星期四, 十二月 5日 2019, 10:10 上午
+                </p>
+              
+
+              <p>
+                
+                  
+                  &nbsp;<i class="far fa-chart-bar"></i>
+                  <span class="post-count">
+                    624 字
+                  </span>&nbsp;
+                
+
+                
+                  
+                  &nbsp;<i class="far fa-clock"></i>
+                  <span class="post-count">
+                      2 分钟
+                  </span>&nbsp;
+                
+
+                
+                  <!-- 不蒜子统计文章PV -->
+                  
+                  &nbsp;<i class="far fa-eye" aria-hidden="true"></i>&nbsp;
+                  <span id="busuanzi_container_page_pv">
+                    <span id="busuanzi_value_page_pv"></span> 次
+                  </span>&nbsp;
+                
+              </p>
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="fas fa-angle-down scroll-down-arrow"></i>
-            </div>
           
         </div>
       </div>
@@ -121,163 +152,82 @@
 
   <main>
     
-      <div class="container nopadding-md">
-        <div class="py-5 z-depth-3" id="board">
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-md">
+      <div class="py-5 z-depth-3" id="board">
+        <div class="post-content mx-auto" id="post">
+          <div class="markdown-body">
+            <h1 id="LeetCode-2：-两数相加"><a href="#LeetCode-2：-两数相加" class="headerlink" title="LeetCode 2： 两数相加"></a><div align="center">LeetCode 2： 两数相加</div></h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>给出两个<strong>非空</strong>的链表用来表示两个非负的整数。其中，它们各自的位数是按照<strong>逆序</strong>的方式存储的，并且它们的每个节点只能存储<strong>一位</strong>数字。</p>
+<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
+<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
+<p><strong>示例</strong><br><strong>输入</strong>：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br><strong>输出</strong>：7 -&gt; 0 -&gt; 8<br><strong>原因</strong>：342 + 465 = 807</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我们使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。</p>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><h4 id="solution1"><a href="#solution1" class="headerlink" title="solution1:"></a>solution1:</h4><p>就像你在纸上计算两个数字的和那样，我们首先从最低有效位也就是列表 $l1$ 和 $l2$ 的表头开始相加。由于每位数字都应当处于 $0 \ldots …9$ 的范围内，我们计算两个数字的和时可能会出现 “溢出”。例如，$5 + 7 = 12$ 。在这种情况下，我们会将当前位的数值设置为 $2$ ，并将进位 $carry = 1$ 带入下一次迭代。进位 $carry$ 必定是 $0$ 或 $1$，这是因为两个数字相加（考虑到进位）可能出现的最大和为 $9 + 9 + 1 = 19$ 。</p>
+<p>伪代码如下：</p>
+<ul>
+<li>将当前结点初始化为返回列表的哑结点。</li>
+<li>将进位 $carry$ 初始化为 $0$。</li>
+<li>将 $p$ 和 $q$ 分别初始化为列表 $l1$ 和 $l2$ 的头部。</li>
+<li>遍历列表 $l1$ 和 $l2$ 直至到达它们的尾端。</li>
+<li>将 $px$设为结点 $p$ 的值。如果 $p$ 已经到达 $l1$ 的末尾，则将其值设置为 $0$。</li>
+<li>将 $qx$设为结点 $q$ 的值。如果 $q$ 已经到达 $l2$ 的末尾，则将其值设置为 $0$。</li>
+<li>设定 $sums = px + qx + carry$ 。</li>
+<li>更新进位的值，$carry = sums / 10$ 。</li>
+<li>创建一个数值为 $(sum \bmod 10)$ 的新结点，并将其设置为当前结点的下一个结点，然后将当前结点前进到下一个结点。</li>
+<li>同时，将 $p$ 和 $q$ 前进到下一个结点。</li>
+<li>检查 $carry = 1$ 是否成立，如果成立，则向返回列表追加一个含有数字 $1$ 的新结点。</li>
+<li>返回哑结点的下一个结点。</li>
+</ul>
+<p>请注意，我们使用哑结点来简化代码。如果没有哑结点，则必须编写额外的条件语句来初始化表头的值。</p>
+<h4 id="solution2"><a href="#solution2" class="headerlink" title="solution2:"></a>solution2:</h4><p>使用递归的思想</p>
+
+            <hr>
+          </div>
+          <br>
+          <div>
+            <p>
+            
+            
+              <span>
+                <i class="iconfont icon-tag"></i>
                 
-
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/05/LeetCode2%EF%BC%9A%E4%B8%A4%E6%95%B0%E7%9B%B8%E5%8A%A0/">
-        <p class="h4 index-header">LeetCode2：两数相加</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">LeetCode 2： 两数相加题目描述给出两个非空的链表用来表示两个非负的整数。其中，它们各自的位数是按照逆序的方式存储的，并且它们的每个节点只能存储一位数字。
-如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
-您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
-示例输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)输出：7 -&gt; 0 -&gt; 8原因：342 + 465 = 807
-思路我们使用变量来跟踪进位，并从包含最低有效位的表头开始模拟逐位相加的过程。
-题解solution1:就像你在纸上计算两个数字的和那样，我们首先从最低有效位也就是列表 $l1$ 和 $l2$ 的表头开始相加。由于每位数字都应当处于 $0 \ldots …9$ 的范围内，我们计算两个数字的和时可能会出现 “溢出”。例如，$5 + 7 = 12$ 。在这种情况下，我们会将当前位的数值设置为 $2$ ，并将进位 $carry = 1$ 带入下一次迭代。进位 $carry$ 必定是 $0$ 或 $1$，这是因为两个数字相加（考虑到进位）可能</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-05&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/LeetCode">LeetCode</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/03/LeetCode1%EF%BC%9A%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/">
-        <p class="h4 index-header">LeetCode 1： 两数之和</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">LeetCode 1： 两数之和题目描述给定一个整数数组 $nums$ 和一个目标值 $target$，请你在该数组中找出和为目标值的那两个整数，并返回他们的数组下标。
-你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
-示例: 给定 $nums = [2, 7, 11, 15], target = 9$
- 因为 $nums[0] + nums[1] = 2 + 7 = 9$ 所以返回 $[0, 1]$
-思想:寻找 $target-nums$，
-题解暴力破解
-用两层循环，时间复杂度 $o(n^2)$
-使用List中相关函数，在每次循环中查找索引，本质上依然是 $o(n^2)$ 的时间复杂度
-
-solution1:在每次循环中顺序查找,但当出现重复数字时，第一次查找只会找到自身，只有第二次查找时才能得到结果。
-示例: 给定 $nums = [3, 7, 11, 3], target = 6$
- 只有第二次查找时，才会返回结果
-def twoSum(nums, target):
-    for inx, num1 in enumerate(nums):
-    </div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-03&nbsp;&nbsp;
-        
-        
-        
-          <i class="iconfont icon-tag"></i>
-          
-            <a href="/tags/LeetCode">LeetCode</a>&nbsp;
-          
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/02/%E7%82%B9%E4%BA%91%E7%AC%94%E8%AE%B0-%E4%B8%80-%EF%BC%9APointNet/">
-        <p class="h4 index-header">点云笔记(一)：PointNet</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation0. SummaryThis paper proposes an end to end architecture to directly consumes point clouds, which is well respect the permutation invariance of the input points. It’s unified for applications ranging from object classification, part segmentation, to scene semantic parsing.
-1.Research ObjectiveMost works in deep learning focus on regular input representations like sequences, images and volumes, not much work has been done</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-02&nbsp;&nbsp;
-        
-        
-        
-      </div>
-    </div>
-  </div>
-
-  <div class="row mb-4 mx-auto">
-    
-    
-    <div class="col-12 col-md-8 m-auto">
-      <a href="/2019/12/01/hello-world/">
-        <p class="h4 index-header">Hello World</p>
-        
-        
-          
-        
-        <div class="index-excerpt" >
-          <div class="index-text mb-1">Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post$ hexo new &quot;My New Post&quot;
-More info: Writing
-Run server$ hexo server
-More info: Server
-Generate static files$ hexo generate
-More info: Generating
-Deploy to remote sites$ hexo deploy
-More info: Deployment
-</div>
-        </div>
-      </a>
-
-      <div>
-        
-          <i class="iconfont icon-riqi2"></i>&nbsp;2019-12-01&nbsp;&nbsp;
-        
-        
-        
-      </div>
-    </div>
-  </div>
-
-
-
-
-
-              </div>
-            </div>
+                  <a class="hover-with-bg" href="/tags/LeetCode">LeetCode</a>
+                
+              </span>
+            
+            </p>
+            
+              <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a href="https://zh.wikipedia.org/wiki/Wikipedia:CC_BY-SA_3.0%E5%8D%8F%E8%AE%AE%E6%96%87%E6%9C%AC" target="_blank" rel="nofollow noopener noopener">CC BY-SA 3.0协议</a> 。转载请注明出处！</p>
+            
           </div>
         </div>
       </div>
+    </div>
+    <div class="d-none d-lg-block col-lg-2 toc-container">
+      
+  <div id="toc">
+    <p class="h4"><i class="far fa-list-alt"></i>&nbsp;目录</p>
+    <div id="tocbot"></div>
+  </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- custom -->
+
+
+<!-- Comments -->
+<div class="col-lg-7 mx-auto nopadding-md">
+  <div class="container comments mx-auto" id="comments">
+    
+  </div>
+</div>
+
     
   </main>
 
@@ -352,6 +302,11 @@ More info: Deployment
 
 
 
+  
+    <script src="/lib/tocbot/tocbot.min.js" ></script>
+  
+  <script src="/js/post.js" ></script>
+
 
 
   <script src="/lib/smooth-scroll/smooth-scroll.min.js" ></script>
@@ -392,7 +347,7 @@ More info: Deployment
     var typed = new Typed('#subtitle', {
       strings: [
         '  ',
-        "面对疾风吧&nbsp;",
+        "LeetCode2：两数相加&nbsp;",
       ],
       cursorChar: "_",
       typeSpeed: 70,
@@ -449,6 +404,32 @@ More info: Deployment
   </script>
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+          tex2jax: {
+              inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+              processEscapes: true,
+              skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+          }
+      });
+
+      MathJax.Hub.Queue(function() {
+          var all = MathJax.Hub.getAllJax(), i;
+          for(i=0; i < all.length; i += 1) {
+              all[i].SourceElement().parentNode.className += ' has-jax';
+          }
+      });
+
+    </script>
+
+    <script src="https://cdn.staticfile.org/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML" ></script>
+
+  
 
 
 
